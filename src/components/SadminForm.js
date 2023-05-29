@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-function SadminForm() {
+function SadminForm(props) {
   const [enteredId, setEnteredId] = useState('');
   const [enteredPrice, setEnteredPrice] = useState('');
   const [enteredName, setEnteredName] = useState('');
-  const [enteredCategory, setEnteredCategory] = useState('Electronic');
+  const [enteredCategory, setEnteredCategory] = useState('electronic');
 
   const idChangeHandler = (event) => {
     setEnteredId(event.target.value);
@@ -31,17 +31,12 @@ function SadminForm() {
       name: enteredName,
       category: enteredCategory
     };
-
-    // console.log(enteredData);
-    // Save the new item to localStorage
-    const saveData = JSON.parse(localStorage.getItem(enteredCategory)) || [];
-    localStorage.setItem(enteredCategory, JSON.stringify([...saveData, enteredData]));
-
+    
+    props.onAddAdminData(enteredData);
 
     setEnteredId('');
     setEnteredPrice('');
     setEnteredName('');
-    setEnteredCategory('');
   };
 
   return (

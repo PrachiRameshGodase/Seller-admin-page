@@ -1,54 +1,28 @@
+import React from 'react';
 
-import React, { useState, useEffect } from 'react';
-
-function SadminList() {
-  const [data, setData] = useState({});
-  
-  useEffect(() => {
-    const fetchData = () => {
-      const electronicData = JSON.parse(localStorage.getItem('electronic')) || [];
-      const foodData = JSON.parse(localStorage.getItem('food')) || [];
-      const skincareData = JSON.parse(localStorage.getItem('skinCare')) || [];
-
-    setData({
-        electronic: electronicData,
-        food: foodData,
-        skinCare: skincareData
-      });
-      
-    };
-
-    fetchData();
-  }, []);
-
-  const deleteItemHandler = (category, index) => {
-    // const saveData = JSON.parse(localStorage.getItem(category)) || [];
-    const updatedData = data[category].filter((_, i) => i !== index);
-    localStorage.setItem(category, JSON.stringify(updatedData));
-    setData(prevState => ({
-      ...prevState,
-      [category]: updatedData
-    }));
+function SadminList(props) {
+  const deleteItemHandler = (categoryId, itemId) => {
+    props.onDeleteAdminData(categoryId, itemId);
   };
 
-  const renderItems = category => {
-    const items = data[category] || [];
-    return items.map((item, index) => (
-      <li key={index}>
-        {item.price} - {item.name} - {category}
-        <button onClick={() => deleteItemHandler(category, index)}>
-          Delete Order
-        </button>
-      </li>
-    ));
+  const renderItems = (category) => {
+    const categoryData = props.items.find((adminCategory) => adminCategory.category === category);
+
+    if (categoryData && categoryData.items && Object.keys(categoryData.items).length > 0) {
+      return Object.entries(categoryData.items).map(([enteredDataId, admin]) => (
+        <li key={enteredDataId}>
+          {admin.price} {admin.name} {admin.category}
+          <button onClick={() => deleteItemHandler(categoryData.category, enteredDataId)}>
+            Delete Order
+          </button>
+        </li>
+      ));
+    }
+
+    return null;
   };
 
-  
-
-  
-
-  
-  return (
+return (
     <div>
       <h2>Products</h2>
       <h3>Electronic Item</h3>
