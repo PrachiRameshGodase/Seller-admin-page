@@ -1,4 +1,5 @@
 import React from 'react';
+import classes from "./SadminList.module.css"
 
 function SadminList(props) {
   const deleteItemHandler = (categoryId, itemId) => {
@@ -11,8 +12,8 @@ function SadminList(props) {
     if (categoryData && categoryData.items && Object.keys(categoryData.items).length > 0) {
       return Object.entries(categoryData.items).map(([enteredDataId, admin]) => (
         <li key={enteredDataId}>
-          {admin.price} {admin.name} {admin.category}
-          <button onClick={() => deleteItemHandler(categoryData.category, enteredDataId)}>
+         {`Price:${admin.price}----Product-Name:${admin.name}----Product-Category:${admin.category}`} 
+          <button className={classes.button} onClick={() => deleteItemHandler(categoryData.category, enteredDataId)}>
             Delete Order
           </button>
         </li>
@@ -23,8 +24,8 @@ function SadminList(props) {
   };
 
 return (
-    <div>
-      <h2>Products</h2>
+    <div className={classes.list}>
+      <h2 >Products</h2>
       <h3>Electronic Item</h3>
       <ul>{renderItems('electronic')}</ul>
       <h3>Food Item</h3>

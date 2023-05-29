@@ -1,0 +1,29 @@
+.list{
+  margin-left: 3rem;  
+    
+}
+.list h2{
+    font-size: 30px;
+    margin-bottom: 1rem 1rem;
+}
+.list h3{
+ font-size: 25px;
+}
+.list ul{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: antiquewhite;
+
+}
+.button{
+    text-align: right;
+    font: inherit;
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: red;
+    border: 1px solid red;
+    border-color:red;
+    color: white;
+    border-radius: 8px;
+    margin-left: 1.5rem;
+}
